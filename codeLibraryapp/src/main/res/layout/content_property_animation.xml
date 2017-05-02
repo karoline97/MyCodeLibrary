@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_property_animation"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.karoline.animation.PropertyAnimationActivity"
+    tools:showIn="@layout/activity_property_animation">
+
+    <ImageView
+        android:id="@+id/propertyanimation_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/header"
+        android:scaleType="centerCrop"
+        android:onClick="rotateyAnimRun"/>
+
+    <ImageView
+        android:id="@+id/propertyanimation_ball"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ball_red" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/propertyanimation_image"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/propertyanimation_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="verticalRun"
+            android:text="垂直" />
+
+        <Button
+            android:id="@+id/propertyanimation_parabola"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="paowuxian"
+            android:text="抛物线" />
+
+    </LinearLayout>
+
+</RelativeLayout>

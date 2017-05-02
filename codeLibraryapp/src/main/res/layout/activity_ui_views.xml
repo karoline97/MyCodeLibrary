@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ccc"
+    android:scrollbars="none"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/uiviews_coordinatorlayoutandtollbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="#fff"
+            android:gravity="center_vertical"
+            android:paddingLeft="8dp"
+            android:text="CoordinatorLayout + AppBarLaout"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/uiviews_cactlayout"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="#eee"
+            android:gravity="center_vertical"
+            android:paddingLeft="8dp"
+            android:text="coordinator+AppBar+CollapsingToolbar_Layout"
+            android:textSize="16sp" />
+        <TextView
+            android:id="@+id/uiviews_drawerlayout_navigationview"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="#fff"
+            android:gravity="center_vertical"
+            android:paddingLeft="8dp"
+            android:text="DrawerLayout+NavigationView"
+            android:textSize="16sp" />
+        <TextView
+            android:id="@+id/uiviews_complatetextview"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="#eee"
+            android:gravity="center_vertical"
+            android:paddingLeft="8dp"
+            android:text="AutoComplateTextView"
+            android:textSize="16sp" />
+        <TextView
+            android:id="@+id/uiviews_barview"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="#fff"
+            android:gravity="center_vertical"
+            android:paddingLeft="8dp"
+            android:text="BarViews"
+            android:textSize="16sp" />
+        <TextView
+            android:id="@+id/uiviews_deleteitem"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="#eee"
+            android:gravity="center_vertical"
+            android:paddingLeft="8dp"
+            android:text="DleteItemsListView"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/uiviews_timeselect"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="#fff"
+            android:gravity="center_vertical"
+            android:paddingLeft="8dp"
+            android:text="TimeSelectDialog\nAddAndSubView"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+</ScrollView>
