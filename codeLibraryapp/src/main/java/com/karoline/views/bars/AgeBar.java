@@ -10,10 +10,10 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.karoline.beans.AgeData;
-import com.karoline.utils.SizeUtils;
+import com.china317.developlibrary.utils.DisplayUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -44,7 +44,7 @@ public class AgeBar extends View {
         mContext = context;
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaint.setColor(Color.BLACK);
-        textPaint.setTextSize(SizeUtils.dp2px(context,10));
+        textPaint.setTextSize(DisplayUtil.DipToPx(context,10));
 
         linePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         linePaint.setColor(Color.DKGRAY);
@@ -55,9 +55,8 @@ public class AgeBar extends View {
         rectPaint.setColor(Color.parseColor("#91a7ff"));
         rectPaint.setTextSize(rectWidth);
 
-        distance = SizeUtils.dp2px(context,16);
+        distance = DisplayUtil.DipToPx(context,16);
         setBarWidth(24);
-        setMaxValue(0);
     }
 
     public AgeBar(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -66,30 +65,41 @@ public class AgeBar extends View {
 
     public void setBarWidth(float rectWidthDp){
         if(rectWidthDp < 8){
-            rectWidth = SizeUtils.dp2px(mContext,16);
+            rectWidth = DisplayUtil.DipToPx(mContext,16);
         }else {
-            this.rectWidth = SizeUtils.dp2px(mContext,rectWidthDp);
+            this.rectWidth =DisplayUtil.DipToPx(mContext,rectWidthDp);
         }
         rectPaint.setTextSize(rectWidth);
     }
 
-    public void setMaxValue(float maxValue){
-        if(maxValue < 10){
-            this.maxValue = 10;
-        }else {
-            this.maxValue = maxValue;
-        }
-    }
-
-    public void setyValues(List<Integer> yValues){
-        if(yValues == null){
+    private void setyValues(){
+        if(datas == null || datas.size()==0) return;
+        if(yValues == null) {
             yValues = new ArrayList<>();
         }
-        this.yValues = yValues;
+        yValues.clear();
+        for(AgeData data : datas){
+            yValues.add(data.count);
+        }
+        int ageNumMax = Collections.max(yValues);
+        int temp = ageNumMax % 10;
+        int ageYsize = 0;
+        int temp1 = (int) ageNumMax/10;
+        if(temp > 0){
+            ageYsize = temp1 +1;
+        }else{
+            ageYsize = temp1;
+        }
+        yValues.clear();
+        for(int i=0;i<ageYsize;i++){
+            yValues.add((i+1)*10);
+        }
+        maxValue = ageYsize*10+10;
     }
 
     public void setData(List<AgeData> dataS){
         this.datas = dataS;
+        setyValues();
         invalidate();
     }
 
@@ -114,12 +124,15 @@ public class AgeBar extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        if(yValues == null || datas == null || datas.size() == 0 ) {
+            return;
+        }
         //Y
         float yTextEndX = distance;
         float yTextStartY = barHeight - distance;
         float perY = yTextStartY/maxValue;
 
-        textPaint.setTextSize(SizeUtils.dp2px(mContext,10));
+        textPaint.setTextSize(DisplayUtil.DipToPx(mContext,10));
         for(int i=0;i <= yValues.size();i++){
             if(i == yValues.size()){
                 bitmapCanvas.drawText("0",distance/2, yTextStartY,textPaint);
@@ -139,7 +152,7 @@ public class AgeBar extends View {
         bitmapCanvas.save();
 
         //X
-        textPaint.setTextSize(SizeUtils.dp2px(mContext,10));
+        textPaint.setTextSize(DisplayUtil.DipToPx(mContext,10));
         float xTendX = barWidth - distance *2;
         float perBar = xTendX/datas.size();
         for(int i = 0; i < datas.size(); i++){
@@ -163,7 +176,7 @@ public class AgeBar extends View {
         bitmapCanvas.drawLine(yTextEndX,yTextStartY,barWidth,yTextStartY,linePaint);//X轴
         bitmapCanvas.save();
 
-        textPaint.setTextSize(SizeUtils.dp2px(mContext,16));
+        textPaint.setTextSize(DisplayUtil.DipToPx(mContext,16));
         bitmapCanvas.drawText("年龄",xTendX/2,distance,textPaint);
         bitmapCanvas.save();
 

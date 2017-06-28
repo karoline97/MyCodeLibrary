@@ -11,7 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
-import com.karoline.utils.SizeUtils;
+import com.china317.developlibrary.utils.DisplayUtil;
+import com.china317.syrailway.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -51,12 +52,12 @@ public class TimeSelectDialog {
 
         TextView titleText = new TextView(mContext);
         titleText.setText("选择时间");
-        titleText.setBackgroundColor(Color.CYAN);
+        titleText.setBackgroundResource(R.color.colorPrimary);
         titleText.setTextColor(Color.WHITE);
         titleText.setTextSize(18);//(SizeUtils.sp2px(mContext,18));
         titleText.setGravity(Gravity.CENTER);
         titleText.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                SizeUtils.dp2px(mContext,56)));
+                (int) DisplayUtil.DipToPx(mContext,56f)));
 
         LinearLayout timeSelect = new LinearLayout(mContext);
         timeSelect.setOrientation(LinearLayout.HORIZONTAL);
@@ -65,7 +66,7 @@ public class TimeSelectDialog {
 
         LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(0,
                 LinearLayout.LayoutParams.WRAP_CONTENT,1);
-        params1.setMargins(SizeUtils.dp2px(mContext,8),0,SizeUtils.dp2px(mContext,8),0);
+        params1.setMargins((int) DisplayUtil.DipToPx(mContext,8),0,(int) DisplayUtil.DipToPx(mContext,8),0);
 
         final NumberPicker mYear = new NumberPicker(mContext);
         mYear.setLayoutParams(params1);
@@ -79,26 +80,26 @@ public class TimeSelectDialog {
         mDay.setLayoutParams(params1);
         mDay.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
 
-        final NumberPicker mHour = new NumberPicker(mContext);
+        /*final NumberPicker mHour = new NumberPicker(mContext);
         mHour.setLayoutParams(params1);
         mHour.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
 
         final NumberPicker mMinute = new NumberPicker(mContext);
         mMinute.setLayoutParams(params1);
-        mMinute.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+        mMinute.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);*/
 
         timeSelect.removeAllViews();
         timeSelect.addView(mYear);
         timeSelect.addView(mMonth);
         timeSelect.addView(mDay);
-        timeSelect.addView(mHour);
-        timeSelect.addView(mMinute);
+       // timeSelect.addView(mHour);
+       // timeSelect.addView(mMinute);
 
         TextView divider= new TextView(mContext);
         divider.setBackgroundColor(Color.LTGRAY);
         LinearLayout.LayoutParams params3 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                SizeUtils.dp2px(mContext,1));
-        params3.setMargins(0,0,0,SizeUtils.dp2px(mContext,8));
+                (int) DisplayUtil.DipToPx(mContext,1));
+        params3.setMargins(0,0,0,(int) DisplayUtil.DipToPx(mContext,8));
         divider.setLayoutParams(params3);
 
         LinearLayout selectBtn = new LinearLayout(mContext);
@@ -107,11 +108,12 @@ public class TimeSelectDialog {
         selectBtn.setBackgroundColor(Color.WHITE);
 
         LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(0,
-                SizeUtils.dp2px(mContext,48),1);
-        params2.setMargins(SizeUtils.dp2px(mContext,8),0,SizeUtils.dp2px(mContext,8),SizeUtils.dp2px(mContext,8));
+                (int) DisplayUtil.DipToPx(mContext,48),1);
+        params2.setMargins((int) DisplayUtil.DipToPx(mContext,8),0,
+                (int) DisplayUtil.DipToPx(mContext,8),(int) DisplayUtil.DipToPx(mContext,8));
         TextView cancelText = new TextView(mContext);
         cancelText.setText("取消");
-        cancelText.setBackgroundColor(Color.CYAN);
+        cancelText.setBackgroundResource(R.color.colorPrimary);
         cancelText.setTextColor(Color.WHITE);
         cancelText.setTextSize(14);//(SizeUtils.sp2px(mContext,14));
         cancelText.setGravity(Gravity.CENTER);
@@ -119,7 +121,7 @@ public class TimeSelectDialog {
 
         TextView okText = new TextView(mContext);
         okText.setText("确定");
-        okText.setBackgroundColor(Color.CYAN);
+        okText.setBackgroundResource(R.color.colorPrimary);
         okText.setTextColor(Color.WHITE);
         okText.setTextSize(14);//(SizeUtils.sp2px(mContext,14));
         okText.setGravity(Gravity.CENTER);
@@ -147,13 +149,13 @@ public class TimeSelectDialog {
         mCalendar.setTime(new Date());
         mDay.setValue(mCalendar.get(Calendar.DATE));
 
-        mHour.setMaxValue(23);
+        /*mHour.setMaxValue(23);
         mHour.setMinValue(0);
         mHour.setValue(mCalendar.get(Calendar.HOUR_OF_DAY));
 
         mMinute.setMaxValue(59);
         mMinute.setMinValue(0);
-        mMinute.setValue(mCalendar.get(Calendar.MINUTE));
+        mMinute.setValue(mCalendar.get(Calendar.MINUTE));*/
 
         mYear.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
@@ -177,8 +179,8 @@ public class TimeSelectDialog {
         okText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCalendar.set(mYear.getValue(),mMonth.getValue()-1,mDay.getValue(),
-                        mHour.getValue(),mMinute.getValue());
+                mCalendar.set(mYear.getValue(),mMonth.getValue()-1,mDay.getValue(),0,0
+                        );//mHour.getValue(),mMinute.getValue());
 
                 mListener.seletedTime(mCalendar.getTimeInMillis());
                 mDialog.dismiss();

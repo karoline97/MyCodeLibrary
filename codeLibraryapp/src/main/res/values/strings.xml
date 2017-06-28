@@ -4,4 +4,7 @@
     <string name="drawer_open">打开抽屉</string>
     <string name="drawer_close">关闭抽屉</string>
     <string name="title_activity_property_animation">PropertyAnimationActivity</string>
+
+    <string name="expand_string">展开</string>
+    <string name="collapsed_string">收起</string>
 </resources>

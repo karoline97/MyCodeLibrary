@@ -10,28 +10,30 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.china317.developlibrary.utils.DecimalFUtil;
 import com.china317.developlibrary.utils.DisplayUtil;
 
 /**
  * Created by ${Karoline} on 2017/4/19.
  */
 
-public class NationBarView extends View{
+public class ZfInfoBar extends View{
     private Context mContext;
     private Paint textPaint;
     private Paint rectPaint;
     private Bitmap bitmapBuffer;
     private Canvas bitmapCanvas;
 
-    private float rectHeight,total,count1,count2;
+    private float rectHeight;
+    private double total,count1,count2;
     private int barWidth,barHeight,barCount;
     private float distance;
 
-    public NationBarView(Context context) {
+    public ZfInfoBar(Context context) {
         super(context);
     }
 
-    public NationBarView(Context context, AttributeSet attrs) {
+    public ZfInfoBar(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -46,7 +48,7 @@ public class NationBarView extends View{
         setBarWidth(0);
     }
 
-    public NationBarView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ZfInfoBar(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
@@ -60,7 +62,7 @@ public class NationBarView extends View{
         rectPaint.setTextSize(rectHeight);
     }
 
-    public void setData(float count1,float count2,float total){
+    public void setData(double count1,double count2,double total){
         this.count1 = count1;
         this.count2 = count2;
         this.total = total;
@@ -89,63 +91,65 @@ public class NationBarView extends View{
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        if(count1 == 0 || count2 == 0 || total == 0){
-            return;
-        }
-
-        float perWidth = barWidth/4;
-        float perRectWidth = (perWidth * 2)/total;
-
         //文字
         textPaint.setTextSize(DisplayUtil.DipToPx(mContext,16));
         Rect rect = new Rect();
-        String string = "汉族";
+        String string = "完成进度";
         textPaint.getTextBounds(string,0,string.length(),rect);
-        bitmapCanvas.drawText(string,perWidth-distance-rect.width(),barHeight/2+rect.height()/2,textPaint);
+        bitmapCanvas.drawText(string,0,barHeight/2+rect.height()/2,textPaint);
 
-        Rect rect1 = new Rect();
-        String string1 = "少数民族";
+
+        /*Rect rect1 = new Rect();
+        String string1 = "剩余";
         textPaint.getTextBounds(string1,0,string1.length(),rect1);
         bitmapCanvas.drawText(string1,perWidth*3+distance,barHeight/2+rect1.height()/2,textPaint);
-        bitmapCanvas.save();
+        bitmapCanvas.save();*/
 
         //柱形图
-        float rate1 = count1/total;
-        float rate2 = count2/total;
+        float start = rect.width()+ distance;
+        float perRectWidth = (float)((barWidth - start)/total);
+
         float markWidth = DisplayUtil.DipToPx(mContext,4);
-        float end = perWidth + perRectWidth*count1;
-        rectPaint.setColor(Color.parseColor("#8d6e63"));
-        RectF rectRate1 = new RectF(perWidth,barHeight/2-rectHeight/2,end,barHeight/2+rectHeight/2);
-        bitmapCanvas.drawRect(rectRate1,rectPaint);
-        bitmapCanvas.save();
+        float end = (float)(start + perRectWidth*count1);
+        if(count1 !=0){
+            rectPaint.setColor(Color.parseColor("#FF00C2BC"));
+            RectF rectRate1 = new RectF(start,barHeight/2-rectHeight/2,end,barHeight/2+rectHeight/2);
+            bitmapCanvas.drawRect(rectRate1,rectPaint);
+            bitmapCanvas.save();
 
-        textPaint.setTextSize(DisplayUtil.DipToPx(mContext,10));
-        bitmapCanvas.drawRect((end-perRectWidth*count1/2)-markWidth/2,
-                barHeight/2-rectHeight/2-distance/2,(end-perRectWidth*count1/2)+markWidth/2,
-                barHeight/2-rectHeight/2,rectPaint);
-        String rate1S = ((int)count1) +"人，"+"占比"+floatToint(rate1);
-        Rect rect2 = new Rect();
-        textPaint.getTextBounds(rate1S,0,rate1S.length(),rect2);
-        bitmapCanvas.drawText(rate1S,(end-perRectWidth*count1/2)-rect2.width()/2,
-                barHeight/2-rectHeight/2-distance/2-distance/4,textPaint);
-        bitmapCanvas.save();
+            textPaint.setTextSize(DisplayUtil.DipToPx(mContext,10));
+            bitmapCanvas.drawRect(((float)(end-perRectWidth*count1/2)-markWidth/2),
+                    barHeight/2-rectHeight/2-distance/2,
+                    (float)((end-perRectWidth*count1/2)+markWidth/2),
+                    barHeight/2-rectHeight/2,rectPaint);
 
-        rectPaint.setColor(Color.parseColor("#d7ccc8"));
-        float start2 = perRectWidth*count1 +perWidth;
-        RectF rectRate2 = new RectF(start2,barHeight/2-rectHeight/2,perWidth*3,barHeight/2+rectHeight/2);
-        bitmapCanvas.drawRect(rectRate2,rectPaint);
-        bitmapCanvas.save();
+            String rate1S = DecimalFUtil.formatTo3(count1) +"元";
+            Rect rect2 = new Rect();
+            textPaint.getTextBounds(rate1S,0,rate1S.length(),rect2);
+            bitmapCanvas.drawText(rate1S,(float)((end-perRectWidth*count1/2)-rect2.width()/2),
+                    barHeight/2-rectHeight/2-distance/2-distance/4,textPaint);
+            bitmapCanvas.save();
+        }
 
-        float start3 = (perWidth*3-start2)/2 + start2;
-        bitmapCanvas.drawRect(start3-markWidth/2,
-                barHeight/2+rectHeight/2,start3+markWidth/2,
-                barHeight/2+rectHeight/2+distance/2,rectPaint);
-        String rate2S = ((int)count2)+"人，"+"占比"+floatToint(rate2);
-        Rect rect3 = new Rect();
-        textPaint.getTextBounds(rate2S,0,rate2S.length(),rect3);
-        bitmapCanvas.drawText(rate2S,start3-rect3.width()/2,
-                barHeight/2+rectHeight/2+distance/2+rect3.height()+distance/4,textPaint);
-        bitmapCanvas.save();
+        if(count2 != 0){
+            rectPaint.setColor(Color.parseColor("#d7ccc8"));
+            float start2 = end;
+            RectF rectRate2 = new RectF(start2,barHeight/2-rectHeight/2,barWidth,barHeight/2+rectHeight/2);
+            bitmapCanvas.drawRect(rectRate2,rectPaint);
+            bitmapCanvas.save();
+
+            float start3 = (barWidth-start2)/2 + start2;
+            bitmapCanvas.drawRect(start3-markWidth/2,
+                    barHeight/2+rectHeight/2,start3+markWidth/2,
+                    barHeight/2+rectHeight/2+distance/2,rectPaint);
+
+            String rate2S = DecimalFUtil.formatTo3(count2) +"元";
+            Rect rect3 = new Rect();
+            textPaint.getTextBounds(rate2S,0,rate2S.length(),rect3);
+            bitmapCanvas.drawText(rate2S,start3-rect3.width()/2,
+                    barHeight/2+rectHeight/2+distance/2+rect3.height()+distance/4,textPaint);
+            bitmapCanvas.save();
+        }
 
         canvas.drawBitmap(bitmapBuffer,0,0,null);
         bitmapCanvas.restore();

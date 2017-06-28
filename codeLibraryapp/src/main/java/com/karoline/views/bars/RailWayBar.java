@@ -15,10 +15,10 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 
 /**
- * Created by ${Karoline} on 2017/4/19.
+ * Created by ${Karoline} on 2017/6/13.
  */
 
-public class FinancialBar extends View{
+public class RailWayBar extends View {
     private Context mContext;
     private Paint textPaint;
     private Paint rectPaint;
@@ -40,17 +40,17 @@ public class FinancialBar extends View{
     private boolean isLengedVisible = false;
     private String desc,color1,desc1,color2,desc2;
 
-    public FinancialBar(Context context) {
+    public RailWayBar(Context context) {
         super(context);
         init(context);
     }
 
-    public FinancialBar(Context context, AttributeSet attrs) {
+    public RailWayBar(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
-    public FinancialBar(Context context, AttributeSet attrs, int defStyleAttr) {
+    public RailWayBar(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }
@@ -58,7 +58,7 @@ public class FinancialBar extends View{
     private void init(Context context){
         mContext = context;
         finshedColor = Color.parseColor("#a6baff");
-        targetColor = Color.parseColor("#fde0dc");
+        targetColor = Color.parseColor("#eceff1");
         excessColor = Color.parseColor("#f36c60");
 
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -142,6 +142,7 @@ public class FinancialBar extends View{
         super.onSizeChanged(w, h, oldw, oldh);
         int width = getMeasuredWidth();
         int hight = getMeasuredHeight();
+
         if (bitmapBuffer == null
                 || (bitmapBuffer.get().getWidth() != width)
                 || (bitmapBuffer.get().getHeight() != hight)) {
@@ -156,52 +157,45 @@ public class FinancialBar extends View{
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
+        //super.onDraw(canvas);
         canvas.save();
         bitmapBuffer.get().eraseColor(Color.TRANSPARENT);
-
         if(isLengedVisible){
             drawLenged();
         }
 
-        float space = distance/4;
         float desc1startX = distance;
-        float desc2startX = barWidth/2;
-        Float startY,endY,perWidth;
+        float desc2startX = barWidth/3*2;
+        Float startY = lengedHeight + 0f,endY,perWidth;
         if(datas == null) return;
 
         textPaint.setTextSize(DisplayUtil.DipToPx(mContext,13));
         for(int i=0;i< datas.size();i++){
-            startY = space*(i+1) + rectHeight*i + lengedHeight;
+           // startY = space*(i+1) + rectHeight*i + lengedHeight;
             endY = startY + rectHeight ;
 
-            if(datas.get(i).targetV.contains("--") ||datas.get(i).targetV.contains("-")){
+            if(datas.get(i).targetV.contains("--") || datas.get(i).targetV.contains("-")){
                 bitmapCanvas.drawLine(0,startY,barWidth,startY,linePaint);
                 rectPaint.setColor(finshedColor);
                 bitmapCanvas.drawRect(0,startY,distance/4,endY,rectPaint);
                 bitmapCanvas.drawLine(0,endY,barWidth,endY,linePaint);
             }else {
-                perWidth = barWidth/(Math.abs(Float.valueOf(datas.get(i).targetV)));
+                perWidth = Math.abs(Float.valueOf(datas.get(i).targetV))/barWidth;
                 rectPaint.setColor(targetColor);
                 bitmapCanvas.drawRect(0,startY,barWidth,endY,rectPaint);
 
-                rectPaint.setColor(finshedColor);
-                bitmapCanvas.drawRect(0,startY,perWidth*(Math.abs(Float.valueOf(datas.get(i).finishedV))),
+               rectPaint.setColor(finshedColor);
+                bitmapCanvas.drawRect(0,startY,(Math.abs(Float.valueOf(datas.get(i).finishedV))/perWidth),
                         endY,rectPaint);
 
-                if(datas.get(i).getRate() > 1){
-                    rectPaint.setColor(excessColor);
-                    Float tempWid = (datas.get(i).getRate() - 1) * (Math.abs(Float.valueOf(datas.get(i).finishedV)));
-                    bitmapCanvas.drawRect(barWidth - tempWid,startY,barWidth,endY,rectPaint);
-                }
             }
 
             Rect rect = new Rect();
             textPaint.getTextBounds(datas.get(i).desc,0,datas.get(i).desc.length(),rect);
             bitmapCanvas.drawText(datas.get(i).desc,desc1startX,startY+rectHeight/2+rect.height()/2,textPaint);
-            bitmapCanvas.drawText(datas.get(i).getDataDesc(),desc2startX,startY+rectHeight/2+rect.height()/2,textPaint);
+            bitmapCanvas.drawText(datas.get(i).finishedV+"万元",desc2startX,startY+rectHeight/2+rect.height()/2,textPaint);
 
+            startY = endY +distance/4;
         }
         bitmapCanvas.save();
 
@@ -209,7 +203,6 @@ public class FinancialBar extends View{
         //Rect det = new Rect(0,0,getWidth(),getHeight());
 
         canvas.drawBitmap(bitmapBuffer.get(),0,0,null);
-        bitmapCanvas.restore();
         canvas.restore();
     }
 
