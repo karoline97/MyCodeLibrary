@@ -9,7 +9,7 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.china317.developlibrary.utils.DisplayUtil;
+import com.karoline.utils.SizeUtils;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -63,7 +63,7 @@ public class RailWayBar extends View {
 
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaint.setColor(Color.BLACK);
-        textPaint.setTextSize(DisplayUtil.DipToPx(context,13));
+        textPaint.setTextSize(SizeUtils.dp2px(context,13));
 
         rectPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         rectPaint.setColor(finshedColor);
@@ -73,15 +73,15 @@ public class RailWayBar extends View {
         linePaint.setColor(Color.DKGRAY);
         linePaint .setTextSize(3);
 
-        distance = DisplayUtil.DipToPx(context,16);
+        distance = SizeUtils.dp2px(context,16);
         setBarHeight(40);
     }
 
     public void setBarHeight(float rectHeighDp){
         if(rectHeighDp < 8){
-            rectHeight = DisplayUtil.DipToPx(mContext,16);
+            rectHeight = SizeUtils.dp2px(mContext,16);
         }else {
-            this.rectHeight = DisplayUtil.DipToPx(mContext,rectHeighDp);
+            this.rectHeight = SizeUtils.dp2px(mContext,rectHeighDp);
         }
         rectPaint.setTextSize(rectHeight);
     }
@@ -94,7 +94,7 @@ public class RailWayBar extends View {
 
     public void setLenged(String desc,String color1,String desc1,String color2,String desc2){
         isLengedVisible = true;
-        lengedHeight = (int) DisplayUtil.DipToPx(mContext,56);
+        lengedHeight = (int) SizeUtils.dp2px(mContext,56);
         this.desc = desc;
         this.color1 = color1;
         this.desc1 = desc1;
@@ -108,7 +108,7 @@ public class RailWayBar extends View {
         float desc1startX = distance;
         float desc2startX = barWidth/2;
         Rect rect = new Rect();
-        textPaint.setTextSize(DisplayUtil.DipToPx(mContext,14));
+        textPaint.setTextSize(SizeUtils.dp2px(mContext,14));
         textPaint.getTextBounds(desc,0,desc.length(),rect);
 
         bitmapCanvas.drawText(desc,desc1startX,lengedHeight/2+rect.height()/2,textPaint);
@@ -169,7 +169,7 @@ public class RailWayBar extends View {
         Float startY = lengedHeight + 0f,endY,perWidth;
         if(datas == null) return;
 
-        textPaint.setTextSize(DisplayUtil.DipToPx(mContext,13));
+        textPaint.setTextSize(SizeUtils.dp2px(mContext,13));
         for(int i=0;i< datas.size();i++){
            // startY = space*(i+1) + rectHeight*i + lengedHeight;
             endY = startY + rectHeight ;
@@ -222,7 +222,7 @@ public class RailWayBar extends View {
     private int onHeightMeasure(int height){
         int mode1 = MeasureSpec.getMode(height);
         int size1 = MeasureSpec.getSize(height);
-        int minSize = (int) DisplayUtil.DipToPx(mContext,16);
+        int minSize = (int)SizeUtils.dp2px(mContext,16);
         if(mode1 == MeasureSpec.EXACTLY){
             barHeight = size1;
         }else {

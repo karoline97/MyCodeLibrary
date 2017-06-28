@@ -17,7 +17,7 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.china317.syrailway.R;
+import com.karoline.R;
 
 import java.util.List;
 
@@ -262,7 +262,7 @@ public class ViewPagerIndicator extends LinearLayout {
         for (int i = 0; i < getChildCount(); i++) {
             View view = getChildAt(i);
             if (view instanceof TextView) {
-                ((TextView) view).setTextColor(getResources().getColor(R.color.text_indicator_normal));
+                ((TextView) view).setTextColor(getResources().getColor(R.color.colorPrimaryDark));
             }
         }
     }

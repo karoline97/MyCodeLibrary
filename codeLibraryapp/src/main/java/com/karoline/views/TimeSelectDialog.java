@@ -11,8 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
-import com.china317.developlibrary.utils.DisplayUtil;
-import com.china317.syrailway.R;
+import com.karoline.R;
+import com.karoline.utils.SizeUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -57,7 +57,7 @@ public class TimeSelectDialog {
         titleText.setTextSize(18);//(SizeUtils.sp2px(mContext,18));
         titleText.setGravity(Gravity.CENTER);
         titleText.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                (int) DisplayUtil.DipToPx(mContext,56f)));
+                (int) SizeUtils.dp2px(mContext,56f)));
 
         LinearLayout timeSelect = new LinearLayout(mContext);
         timeSelect.setOrientation(LinearLayout.HORIZONTAL);
@@ -66,7 +66,7 @@ public class TimeSelectDialog {
 
         LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(0,
                 LinearLayout.LayoutParams.WRAP_CONTENT,1);
-        params1.setMargins((int) DisplayUtil.DipToPx(mContext,8),0,(int) DisplayUtil.DipToPx(mContext,8),0);
+        params1.setMargins((int) SizeUtils.dp2px(mContext,8),0,(int) SizeUtils.dp2px(mContext,8),0);
 
         final NumberPicker mYear = new NumberPicker(mContext);
         mYear.setLayoutParams(params1);
@@ -98,8 +98,8 @@ public class TimeSelectDialog {
         TextView divider= new TextView(mContext);
         divider.setBackgroundColor(Color.LTGRAY);
         LinearLayout.LayoutParams params3 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                (int) DisplayUtil.DipToPx(mContext,1));
-        params3.setMargins(0,0,0,(int) DisplayUtil.DipToPx(mContext,8));
+                (int) SizeUtils.dp2px(mContext,1));
+        params3.setMargins(0,0,0,(int) SizeUtils.dp2px(mContext,8));
         divider.setLayoutParams(params3);
 
         LinearLayout selectBtn = new LinearLayout(mContext);
@@ -108,9 +108,9 @@ public class TimeSelectDialog {
         selectBtn.setBackgroundColor(Color.WHITE);
 
         LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(0,
-                (int) DisplayUtil.DipToPx(mContext,48),1);
-        params2.setMargins((int) DisplayUtil.DipToPx(mContext,8),0,
-                (int) DisplayUtil.DipToPx(mContext,8),(int) DisplayUtil.DipToPx(mContext,8));
+                (int) SizeUtils.dp2px(mContext,48),1);
+        params2.setMargins((int)SizeUtils.dp2px(mContext,8),0,
+                (int)SizeUtils.dp2px(mContext,8),(int) SizeUtils.dp2px(mContext,8));
         TextView cancelText = new TextView(mContext);
         cancelText.setText("取消");
         cancelText.setBackgroundResource(R.color.colorPrimary);

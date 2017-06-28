@@ -9,7 +9,7 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.china317.developlibrary.utils.DisplayUtil;
+import com.karoline.utils.SizeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,13 +48,13 @@ public class CsjdBar extends View {
         rect1Color = Color.parseColor("#91a7ff");
         rect2Color = Color.parseColor("#ff9800");
 
-        textSize = DisplayUtil.DipToPx(context,13);
-        LineSize = DisplayUtil.DipToPx(context,1);
+        textSize = SizeUtils.dp2px(context,13);
+        LineSize = SizeUtils.dp2px(context,1);
 
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-        distance = DisplayUtil.DipToPx(context,16);
+        distance = SizeUtils.dp2px(context,16);
         rectDis = distance;
         setBarHeight(24);
     }
@@ -65,9 +65,9 @@ public class CsjdBar extends View {
 
     public void setBarHeight(float rectHeighDp){
         if(rectHeighDp < 8){
-            rectHeight = DisplayUtil.DipToPx(mContext,16);
+            rectHeight = SizeUtils.dp2px(mContext,16);
         }else {
-            this.rectHeight = DisplayUtil.DipToPx(mContext,rectHeighDp);
+            this.rectHeight = SizeUtils.dp2px(mContext,rectHeighDp);
         }
         mPaint.setTextSize(rectHeight);
     }
@@ -122,9 +122,9 @@ public class CsjdBar extends View {
             return;
         }
 
-        float xStart = DisplayUtil.DipToPx(mContext,56);
+        float xStart = SizeUtils.dp2px(mContext,56);
         float xEnd = barWidth - distance;
-        float yEnd = barHeight - DisplayUtil.DipToPx(mContext,24);
+        float yEnd = barHeight - SizeUtils.dp2px(mContext,24);
         float yStart = distance;
 
         float perW = (xEnd - xStart - distance)/(xDescList.size()-1);
@@ -211,7 +211,7 @@ public class CsjdBar extends View {
     private int onHeightMeasure(int height){
         int mode1 = MeasureSpec.getMode(height);
         int size1 = MeasureSpec.getSize(height);
-        int minSize = (int) DisplayUtil.DipToPx(mContext,120);
+        int minSize = (int) SizeUtils.dp2px(mContext,120);
         int temp1 = 0,temp2 = 0 ,temH=0;
         if(mode1 == MeasureSpec.EXACTLY){
             temH = size1;

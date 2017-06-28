@@ -10,7 +10,7 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.china317.developlibrary.utils.DisplayUtil;
+import com.karoline.utils.SizeUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -44,7 +44,7 @@ public class AgeBar extends View {
         mContext = context;
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaint.setColor(Color.BLACK);
-        textPaint.setTextSize(DisplayUtil.DipToPx(context,10));
+        textPaint.setTextSize(SizeUtils.dp2px(context,10));
 
         linePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         linePaint.setColor(Color.DKGRAY);
@@ -55,7 +55,7 @@ public class AgeBar extends View {
         rectPaint.setColor(Color.parseColor("#91a7ff"));
         rectPaint.setTextSize(rectWidth);
 
-        distance = DisplayUtil.DipToPx(context,16);
+        distance = SizeUtils.dp2px(context,16);
         setBarWidth(24);
     }
 
@@ -65,9 +65,9 @@ public class AgeBar extends View {
 
     public void setBarWidth(float rectWidthDp){
         if(rectWidthDp < 8){
-            rectWidth = DisplayUtil.DipToPx(mContext,16);
+            rectWidth = SizeUtils.dp2px(mContext,16);
         }else {
-            this.rectWidth =DisplayUtil.DipToPx(mContext,rectWidthDp);
+            this.rectWidth = SizeUtils.dp2px(mContext,rectWidthDp);
         }
         rectPaint.setTextSize(rectWidth);
     }
@@ -132,7 +132,7 @@ public class AgeBar extends View {
         float yTextStartY = barHeight - distance;
         float perY = yTextStartY/maxValue;
 
-        textPaint.setTextSize(DisplayUtil.DipToPx(mContext,10));
+        textPaint.setTextSize(SizeUtils.dp2px(mContext,10));
         for(int i=0;i <= yValues.size();i++){
             if(i == yValues.size()){
                 bitmapCanvas.drawText("0",distance/2, yTextStartY,textPaint);
@@ -152,7 +152,7 @@ public class AgeBar extends View {
         bitmapCanvas.save();
 
         //X
-        textPaint.setTextSize(DisplayUtil.DipToPx(mContext,10));
+        textPaint.setTextSize(SizeUtils.dp2px(mContext,10));
         float xTendX = barWidth - distance *2;
         float perBar = xTendX/datas.size();
         for(int i = 0; i < datas.size(); i++){
@@ -176,7 +176,7 @@ public class AgeBar extends View {
         bitmapCanvas.drawLine(yTextEndX,yTextStartY,barWidth,yTextStartY,linePaint);//X轴
         bitmapCanvas.save();
 
-        textPaint.setTextSize(DisplayUtil.DipToPx(mContext,16));
+        textPaint.setTextSize(SizeUtils.dp2px(mContext,16));
         bitmapCanvas.drawText("年龄",xTendX/2,distance,textPaint);
         bitmapCanvas.save();
 

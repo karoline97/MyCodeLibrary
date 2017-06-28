@@ -10,8 +10,8 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.china317.developlibrary.utils.DecimalFUtil;
-import com.china317.developlibrary.utils.DisplayUtil;
+import com.karoline.utils.DecimalFUtil;
+import com.karoline.utils.SizeUtils;
 
 /**
  * Created by ${Karoline} on 2017/4/19.
@@ -38,13 +38,13 @@ public class ZfInfoBar extends View{
         mContext = context;
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaint.setColor(Color.BLACK);
-        textPaint.setTextSize(DisplayUtil.DipToPx(context,16));
+        textPaint.setTextSize(SizeUtils.dp2px(context,16));
 
         rectPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         rectPaint.setColor(Color.parseColor("#8d6e63"));
         rectPaint.setTextSize(rectHeight);
 
-        distance = DisplayUtil.DipToPx(context,16);
+        distance = SizeUtils.dp2px(context,16);
         setBarWidth(0);
     }
 
@@ -54,9 +54,9 @@ public class ZfInfoBar extends View{
 
     public void setBarWidth(float rectHeightDp){
         if(rectHeightDp < 8){
-            rectHeight = DisplayUtil.DipToPx(mContext,16);
+            rectHeight = SizeUtils.dp2px(mContext,16);
         }else{
-            rectHeight = DisplayUtil.DipToPx(mContext,rectHeightDp);
+            rectHeight = SizeUtils.dp2px(mContext,rectHeightDp);
         }
 
         rectPaint.setTextSize(rectHeight);
@@ -92,7 +92,7 @@ public class ZfInfoBar extends View{
         super.onDraw(canvas);
 
         //文字
-        textPaint.setTextSize(DisplayUtil.DipToPx(mContext,16));
+        textPaint.setTextSize(SizeUtils.dp2px(mContext,16));
         Rect rect = new Rect();
         String string = "完成进度";
         textPaint.getTextBounds(string,0,string.length(),rect);
@@ -109,7 +109,7 @@ public class ZfInfoBar extends View{
         float start = rect.width()+ distance;
         float perRectWidth = (float)((barWidth - start)/total);
 
-        float markWidth = DisplayUtil.DipToPx(mContext,4);
+        float markWidth = SizeUtils.dp2px(mContext,4);
         float end = (float)(start + perRectWidth*count1);
         if(count1 !=0){
             rectPaint.setColor(Color.parseColor("#FF00C2BC"));
@@ -117,7 +117,7 @@ public class ZfInfoBar extends View{
             bitmapCanvas.drawRect(rectRate1,rectPaint);
             bitmapCanvas.save();
 
-            textPaint.setTextSize(DisplayUtil.DipToPx(mContext,10));
+            textPaint.setTextSize(SizeUtils.dp2px(mContext,10));
             bitmapCanvas.drawRect(((float)(end-perRectWidth*count1/2)-markWidth/2),
                     barHeight/2-rectHeight/2-distance/2,
                     (float)((end-perRectWidth*count1/2)+markWidth/2),

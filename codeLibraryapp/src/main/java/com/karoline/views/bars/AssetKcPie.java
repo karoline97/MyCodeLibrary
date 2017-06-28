@@ -12,7 +12,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.china317.developlibrary.utils.DisplayUtil;
+import com.karoline.utils.SizeUtils;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -91,7 +91,7 @@ public class AssetKcPie extends View {
 
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaint.setColor(Color.BLACK);
-        textPaint.setTextSize(DisplayUtil.DipToPx(context,11));
+        textPaint.setTextSize(SizeUtils.dp2px(context,11));
 
         arcPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         arcPaint.setTextSize(radius);
@@ -100,9 +100,9 @@ public class AssetKcPie extends View {
         linePaint.setColor(Color.DKGRAY);
         linePaint .setTextSize(3);
 
-        distance = DisplayUtil.DipToPx(context,16);
+        distance = SizeUtils.dp2px(context,16);
 
-        setRadius(DisplayUtil.DipToPx(context,80));
+        setRadius(SizeUtils.dp2px(context,80));
 
     }
 
@@ -122,7 +122,7 @@ public class AssetKcPie extends View {
 
     public void setLenged(){
         isLengedVisible = true;
-        lengedHeight = (int) DisplayUtil.DipToPx(mContext,32);
+        lengedHeight = (int) SizeUtils.dp2px(mContext,32);
 
         setMeasuredDimension(onWidthMeasure(getMeasuredWidth()),onHeightMeasure(getMeasuredHeight()));
     }
@@ -135,7 +135,7 @@ public class AssetKcPie extends View {
         float totalWidth;
         for(int i = 0;i<datas.size();i++){
             RectF rectF = new RectF();
-            textPaint.setTextSize(DisplayUtil.DipToPx(mContext,13));
+            textPaint.setTextSize(SizeUtils.dp2px(mContext,13));
             textPaint.setFakeBoldText(true);
             textPaint.setShadowLayer(5,4,4,Color.GRAY);
             textPaint.getTextBounds(datas.get(i).getDesc(),0,datas.get(i).getDesc().length(),rect);
@@ -252,7 +252,7 @@ public class AssetKcPie extends View {
         bitmapCanvas.drawLine(lineStartX,lineStartY,lineEndX,lineEndY,linePaint);
 
         textPaint.getTextBounds(desc,0,desc.length(),rect);
-        textPaint.setTextSize(DisplayUtil.DipToPx(mContext,11));
+        textPaint.setTextSize(SizeUtils.dp2px(mContext,11));
         textPaint.setFakeBoldText(false);
         textPaint.setShadowLayer(0,0,0,Color.TRANSPARENT);
         if (lineStartX>barWidth/2) {
@@ -280,7 +280,7 @@ public class AssetKcPie extends View {
     private int onHeightMeasure(int height){
         int mode1 = MeasureSpec.getMode(height);
         int size1 = MeasureSpec.getSize(height);
-        int minSize = (int) DisplayUtil.DipToPx(mContext,120);
+        int minSize = (int) SizeUtils.dp2px(mContext,120);
         if(mode1 == MeasureSpec.EXACTLY){
             barHeight = size1;
         }else {

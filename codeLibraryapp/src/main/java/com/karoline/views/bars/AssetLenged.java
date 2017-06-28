@@ -10,7 +10,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.china317.developlibrary.utils.DisplayUtil;
+import com.karoline.utils.SizeUtils;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -42,12 +42,12 @@ public class AssetLenged extends View {
         mContext = context;
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaint.setColor(Color.BLACK);
-        textPaint.setTextSize(DisplayUtil.DipToPx(context,10));
+        textPaint.setTextSize(SizeUtils.dp2px(context,10));
 
         rectPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         rectPaint.setColor(Color.parseColor("#91a7ff"));
 
-        distance = DisplayUtil.DipToPx(context,16);
+        distance = SizeUtils.dp2px(context,16);
     }
 
     public AssetLenged(Context context, AttributeSet attrs, int defStyleAttr) {
