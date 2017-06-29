@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.view.View;
+import android.widget.TextView;
 
 import com.karoline.R;
+import com.karoline.uiviews.AsssetKcActivity;
 import com.karoline.uiviews.AutoCompleteEditTextActivity;
 import com.karoline.uiviews.BarViewsActivity;
 import com.karoline.uiviews.CoodinatorLayoutActivity;
@@ -20,7 +22,7 @@ import common.versionupdate.CheckUpdateTask;
 /**
  * Created by ${Karoline} on 2016/9/2.
  */
-public class ActivityUIViews extends BaseToolBarActivity implements View.OnClickListener{
+public class ActivityUIViews extends BaseToolBarActivity implements View.OnClickListener {
     @BindView(R.id.uiviews_coordinatorlayoutandtollbar)
     View coordinatorlayoutandtollbar;
     @BindView(R.id.uiviews_cactlayout)
@@ -35,18 +37,21 @@ public class ActivityUIViews extends BaseToolBarActivity implements View.OnClick
     View deleteItem;
     @BindView(R.id.uiviews_timeselect)
     View timeSelect;
+    @BindView(R.id.uiviews_PieView)
+    TextView uiviewsPieView;
 
     public final static String ACCOUNT_SID = "5145e0db47051d35b69a9da9945148612f9be95f";
     public final static String AUTO_TOKEN = "b8e1fa5fc6f80bae9f64cdf34df950deb29511f8";
     public final static String APP_CODE = "658c9d082ca57b2eb5c23ad453d08b9b72483d25";
 
+
     @Override
-    int getContentView() {
+    protected int getContentView() {
         return R.layout.activity_ui_views;
     }
 
     @Override
-    void init(Bundle savedInstanceState) {
+    protected void init(Bundle savedInstanceState) {
 
         setTitle("ActivityUIViews");
         setBackVisible();
@@ -54,7 +59,7 @@ public class ActivityUIViews extends BaseToolBarActivity implements View.OnClick
         setRightBtn1Visible(R.drawable.ball_red, new onBtnClickListner() {
             @Override
             public void onBtnClick() {
-                Snackbar.make(timeSelect,"你点击右边第一个按钮",Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(timeSelect, "你点击右边第一个按钮", Snackbar.LENGTH_SHORT).show();
             }
         });
 
@@ -72,12 +77,13 @@ public class ActivityUIViews extends BaseToolBarActivity implements View.OnClick
         barView.setOnClickListener(this);
         deleteItem.setOnClickListener(this);
         timeSelect.setOnClickListener(this);
+        uiviewsPieView.setOnClickListener(this);
 
-        CheckUpdateTask.setAccountInfo(ACCOUNT_SID,AUTO_TOKEN,APP_CODE);
+        CheckUpdateTask.setAccountInfo(ACCOUNT_SID, AUTO_TOKEN, APP_CODE);
         CheckUpdateTask task = new CheckUpdateTask(this, false, new CheckUpdateTask.UpdateListener() {
             @Override
             public void VersionUpdateFail(String msg) {
-                Snackbar.make(cactlayout,msg,Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(cactlayout, msg, Snackbar.LENGTH_SHORT).show();
             }
 
             @Override
@@ -85,19 +91,19 @@ public class ActivityUIViews extends BaseToolBarActivity implements View.OnClick
 
             }
         });
-       // task.execute("android","prod");
+        // task.execute("android","prod");
     }
 
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.uiviews_coordinatorlayoutandtollbar:
                 enterActivity(CoodinatorLayoutActivity.class);
                 break;
             case R.id.uiviews_cactlayout:
-                Intent intent1 = new Intent(ActivityUIViews.this,CoordinatorCollapsingActivity.class);
-                intent1.putExtra("layoutid",R.layout.coordinator_collapsingtoolbar);
+                Intent intent1 = new Intent(ActivityUIViews.this, CoordinatorCollapsingActivity.class);
+                intent1.putExtra("layoutid", R.layout.coordinator_collapsingtoolbar);
                 startActivity(intent1);
                 break;
             case R.id.uiviews_drawerlayout_navigationview:
@@ -118,6 +124,10 @@ public class ActivityUIViews extends BaseToolBarActivity implements View.OnClick
 
             case R.id.uiviews_timeselect:
                 enterActivity(TimeSelectActivity.class);
+                break;
+
+            case R.id.uiviews_PieView:
+                enterActivity(AsssetKcActivity.class);
                 break;
 
             default:

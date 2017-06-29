@@ -45,7 +45,7 @@
         <activity android:name=".uiviews.BarViewsActivity" />
         <activity android:name=".uiviews.DeleteItemListViewActivity" />
         <activity android:name=".uiviews.TimeSelectActivity" />
-        <activity android:name=".codelibrary.BaseToolBarActivity"></activity>
+        <activity android:name=".uiviews.AsssetKcActivity"/>
     </application>
 
 </manifest>

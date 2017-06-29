@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#e0f7fa"
+        android:padding="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/assetkc_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="当前库存金额"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.karoline.views.bars.AssetKcPie
+                android:id="@+id/assetkc_chart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#e0f7fa"
+                android:gravity="center"
+                android:minHeight="220dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:padding="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/assetkc_desc1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="当前库存金额"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.karoline.views.bars.AssetKcPie
+                android:id="@+id/assetkc_chart1"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:gravity="center" />
+        </LinearLayout>
+        <com.karoline.views.bars.AssetLenged
+            android:id="@+id/assetkc_lenged"
+            android:layout_width="match_parent"
+            android:layout_height="72dp" />
+    </LinearLayout>
+    </LinearLayout>
+</ScrollView>

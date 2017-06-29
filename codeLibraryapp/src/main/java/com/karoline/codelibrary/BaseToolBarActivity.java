@@ -95,8 +95,8 @@ public abstract class BaseToolBarActivity extends AppCompatActivity {
         finish();
     }
 
-    abstract int getContentView();
-    abstract void init(Bundle savedInstanceState);
+    protected abstract int getContentView();
+    protected abstract void init(Bundle savedInstanceState);
 
     public interface onBtnClickListner{
         void onBtnClick();

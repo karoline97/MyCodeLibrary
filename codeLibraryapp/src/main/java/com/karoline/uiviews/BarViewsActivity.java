@@ -5,8 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.karoline.R;
 import com.karoline.views.bars.AgeBar;
-import com.karoline.beans.AgeData;
-import com.karoline.beans.FinacialData;
+import com.karoline.views.bars.AgeData;
+import com.karoline.views.bars.FinacialData;
 import com.karoline.views.bars.FinancialBar;
 import com.karoline.views.bars.NationBarView;
 
@@ -30,13 +30,6 @@ public class BarViewsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bar_views);
         ButterKnife.bind(this);
 
-        ageBar.setMaxValue(50);
-        List<Integer> valus = new ArrayList<>();
-        valus.add(10);
-        valus.add(20);
-        valus.add(30);
-        valus.add(40);
-        ageBar.setyValues(valus);
 
         List<AgeData> datas1 = new ArrayList<>();
         datas1.add(new AgeData("30及以下",2));
